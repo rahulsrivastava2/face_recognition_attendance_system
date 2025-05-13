@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Details</title>
+  <link rel="icon" type="image/png" href="facial-recognition.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+
+  <style>
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background: linear-gradient(to right, #6bc2e1, #1463a5);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      max-width: 600px;
+      width: 100%;
+      margin: 20px;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    }
+
+    h1 {
+      text-align: center;
+      color: #145aa1;
+      margin-bottom: 30px;
+    }
+
+    .student-details {
+      border-top: 1px solid #ddd;
+      padding-top: 20px;
+      margin-bottom: 30px;
+    }
+
+    .detail {
+      margin-bottom: 15px;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .detail strong {
+      color: #145aa1;
+      width: 120px;
+      display: inline-block;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .actions a {
+      text-decoration: none;
+      background-color: #145aa1;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+
+    .actions a:hover {
+      background-color: #0d4a8b;
+    }
+
+    .actions i {
+      margin-right: 6px;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px 15px;
+      }
+
+      .detail {
+        font-size: 15px;
+      }
+
+      .actions a {
+        font-size: 13px;
+        padding: 8px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Student Details</h1>
+    <div class="student-details">
+      <div class="detail"><strong>Name:</strong> {{ student.name }}</div>
+      <div class="detail"><strong>Email:</strong> {{ student.email }}</div>
+      <div class="detail"><strong>Phone Number:</strong> {{ student.phone_number }}</div>
+      <div class="detail"><strong>Class:</strong> {{ student.student_class }}</div>
+      <div class="detail"><strong>Authorized:</strong> {% if student.authorized %} Yes {% else %} No {% endif %}</div>
+    </div>
+    <div class="actions">
+      <a href="{% url 'student-list' %}"><i class="fas fa-arrow-left"></i> Back to List</a>
+      <a href="{% url 'student-authorize' pk=student.pk %}"><i class="fas fa-check-circle"></i> Authorize</a>
+      <a href="{% url 'student-delete' pk=student.pk %}"><i class="fas fa-trash-alt"></i> Delete</a>
+    </div>
+  </div>
+</body>
+</html>

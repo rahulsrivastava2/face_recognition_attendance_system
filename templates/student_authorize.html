@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authorize Student</title>
+    <link rel="icon" type="image/png" href="facial-recognition.png">
+    
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #e0f7fa, #fce4ec);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 30px;
+        }
+        .student-details .detail {
+            margin-bottom: 12px;
+            font-size: 16px;
+            color: #333;
+        }
+        .form-group label {
+            font-weight: 500;
+            color: #555;
+        }
+        input[type="checkbox"] {
+            transform: scale(1.3);
+            margin-right: 10px;
+        }
+        button[type="submit"] {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            padding: 12px;
+            border: none;
+            font-size: 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .actions {
+            margin-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .actions a {
+            flex: 1 1 45%;
+            margin: 5px;
+            padding: 10px 0;
+            text-align: center;
+            background-color: #ffffff;
+            color: #007bff;
+            border: 2px solid #007bff;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .actions a:hover {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px 15px;
+                padding: 20px;
+            }
+            .actions {
+                flex-direction: column;
+            }
+            .actions a {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-user-check"></i> Authorize Student</h1>
+        <div class="student-details">
+            <div class="detail"><strong>Name:</strong> {{ student.name }}</div>
+            <div class="detail"><strong>Email:</strong> {{ student.email }}</div>
+            <div class="detail"><strong>Phone Number:</strong> {{ student.phone_number }}</div>
+            <div class="detail"><strong>Class:</strong> {{ student.student_class }}</div>
+            <div class="detail"><strong>Authorized:</strong> {% if student.authorized %} Yes {% else %} No {% endif %}</div>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group form-check">
+                <input type="checkbox" id="authorized" name="authorized" class="form-check-input" {% if student.authorized %} checked {% endif %}>
+                <label for="authorized" class="form-check-label">Authorize this student</label>
+            </div>
+            <button type="submit">Update Authorization</button>
+        </form>
+
+        <div class="actions">
+            <a href="{% url 'student-list' %}"><i class="fas fa-list"></i> Back to List</a>
+            <a href="{% url 'student-detail' pk=student.pk %}"><i class="fas fa-eye"></i> View Details</a>
+        </div>
+    </div>
+</body>
+</html>

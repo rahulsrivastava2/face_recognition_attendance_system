@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Camera Configuration</title>
+    <link rel="icon" type="image/png" href="facial-recognition.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #e3f2fd, #fce4ec);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.9rem;
+            color: #d32f2f;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        button, a {
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        button {
+            background-color: #e53935;
+            color: white;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #b71c1c;
+        }
+
+        a {
+            background-color: #607d8b;
+            color: white;
+        }
+
+        a:hover {
+            background-color: #455a64;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px 20px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            p {
+                font-size: 0.95rem;
+            }
+
+            button, a {
+                font-size: 0.9rem;
+                padding: 10px 20px;
+            }
+
+            .button-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-trash-alt"></i> Delete Configuration</h1>
+        <p>Are you sure you want to delete <strong>"{{ config.name }}"</strong>?</p>
+        
+        <form method="POST">
+            {% csrf_token %}
+            <div class="button-container">
+                <button type="submit"><i class="fas fa-check"></i> Yes, Delete</button>
+                <a href="{% url 'camera_config_list' %}"><i class="fas fa-times"></i> Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

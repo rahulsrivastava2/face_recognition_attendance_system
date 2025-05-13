@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registration Successful</title>
+  <link rel="icon" type="image/png" href="facial-recognition.png"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      background: linear-gradient(to right, #5aa1c4, #145aa1);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .card {
+      background-color: #ffffff;
+      color: #343a40;
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      max-width: 600px;
+      width: 100%;
+      padding: 30px;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: #145aa1;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: #6c757d;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+
+    .btn-home {
+      background-color: #28a745;
+      color: white;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      display: inline-block;
+    }
+
+    .btn-home i {
+      margin-right: 8px;
+    }
+
+    .btn-home:hover {
+      background-color: #218838;
+      text-decoration: none;
+      color: white;
+    }
+
+    @media (max-width: 576px) {
+      h2 {
+        font-size: 1.8rem;
+      }
+      h3 {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Registered Successfully!</h2>
+    <h3>Please wait for admin approval</h3>
+    <a href="{% url 'home' %}" class="btn-home">
+      <i class="fas fa-home"></i> Back to Home
+    </a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

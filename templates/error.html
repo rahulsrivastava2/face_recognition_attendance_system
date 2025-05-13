@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Error Occurred</title>
+  <link rel="icon" type="image/png" href="facial-recognition.png"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #1c1c1c, #000);
+      color: #FFD700;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #FFD700;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    a {
+      color: #000;
+      background-color: #FFD700;
+      text-decoration: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: 600;
+      display: inline-block;
+      margin-top: 15px;
+      transition: background-color 0.3s ease;
+    }
+
+    a:hover {
+      background-color: #ffc107;
+    }
+
+    .suggestion {
+      background-color: #222;
+      border: 1px solid #FFD700;
+      padding: 25px;
+      border-radius: 12px;
+      margin-top: 30px;
+      max-width: 600px;
+      width: 90%;
+      box-shadow: 0 8px 20px rgba(255, 215, 0, 0.2);
+    }
+
+    .suggestion h2 {
+      font-size: 1.6rem;
+      color: #FFD700;
+      margin-bottom: 15px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+      text-align: left;
+      color: #e0e0e0;
+    }
+
+    ul li {
+      font-size: 1rem;
+      margin: 8px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    ul li::before {
+      content: "\f058";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      color: #FFD700;
+    }
+
+    @media (max-width: 576px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .suggestion h2 {
+        font-size: 1.3rem;
+      }
+
+      ul li {
+        font-size: 0.95rem;
+      }
+
+      a {
+        font-size: 0.95rem;
+        padding: 10px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>An Error Occurred</h1>
+  <p>{{ error_message }}</p>
+  <p><a href="{% url 'home' %}"><i class="fas fa-home"></i> Return to Home</a></p>
+
+  <div class="suggestion">
+    <h2>Suggested Fixes</h2>
+    <p>It looks like there's an issue with the camera setup. Try the following:</p>
+    <ul>
+      <li>Ensure the camera is connected and powered on.</li>
+      <li>Verify the IP address and port settings in your camera configuration.</li>
+      <li>Make sure camera access permissions are granted to your browser/system.</li>
+      <li>Check your network connection or firewall settings.</li>
+      <li>Consult the camera's user manual for additional troubleshooting steps.</li>
+    </ul>
+  </div>
+</body>
+</html>

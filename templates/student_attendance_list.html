@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Attendance List</title>
+  <link rel="icon" type="image/png" href="facial-recognition.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, rgb(90, 157, 196), rgb(21, 90, 155));
+      color: white;
+      min-height: 100vh;
+    }
+
+    .main-content {
+      padding: 30px 15px;
+      width: 100%;
+    }
+
+    .heading {
+      text-align: center;
+      color: yellow;
+      font-size: 2em;
+      margin-bottom: 30px;
+    }
+
+    .filter-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin-bottom: 25px;
+    }
+
+    .input-group {
+      flex: 1 1 300px;
+      max-width: 400px;
+    }
+
+    .btn-custom {
+      background-color: yellow;
+      color: black;
+      font-weight: bold;
+    }
+
+    .btn-custom:hover {
+      background-color: #fcd303;
+    }
+
+    .table-container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    .table thead th {
+      background-color: rgb(19, 105, 216);
+      color: yellow;
+      text-align: center;
+    }
+
+    .table td, .table th {
+      text-align: center;
+      vertical-align: middle;
+      color: #ffffff;
+    }
+
+    .table tbody tr:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .back-icon {
+      color: yellow;
+      font-size: 1.5em;
+      cursor: pointer;
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .back-icon:hover {
+      color: #ffc107;
+    }
+
+    @media (max-width: 576px) {
+      .heading {
+        font-size: 1.5em;
+      }
+
+      .table-container {
+        padding: 10px;
+      }
+
+      .table {
+        font-size: 0.85em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main-content container-fluid">
+    <h2 class="heading"><i class="fas fa-user-check"></i> Student Attendance Records</h2>
+
+    <form method="get" class="filter-container">
+      <div class="input-group">
+        <input type="text" name="search" class="form-control" placeholder="Search for students..." value="{{ search_query }}">
+        <div class="input-group-append">
+          <button class="btn btn-custom" type="submit"><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+      <div class="input-group">
+        <input type="date" name="attendance_date" class="form-control" value="{{ date_filter }}">
+        <div class="input-group-append">
+          <button class="btn btn-custom" type="submit"><i class="fas fa-filter"></i></button>
+        </div>
+      </div>
+    </form>
+
+    <div class="table-responsive table-container mt-4">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Student Image</th>
+            <th>Student Name</th>
+            <th>Attendance Date</th>
+            <th>Check-in</th>
+            <th>Check-out</th>
+            <th>Stayed Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for data in student_attendance_data %}
+            {% for attendance in data.attendance_records %}
+            <tr>
+              <td>
+                {% if data.student.image %}
+                  <img src="{{ data.student.image.url }}" alt="{{ data.student.name }}">
+                {% else %}
+                  No Image
+                {% endif %}
+              </td>
+              <td>{{ data.student.name }}</td>
+              <td>{{ attendance.date }}</td>
+              <td>{{ attendance.check_in_time|date:"h:i:s A" }}</td>
+              <td>{{ attendance.check_out_time|date:"h:i:s A" }}</td>
+              <td>
+                {% if attendance.check_in_time and attendance.check_out_time %}
+                  {{ attendance.calculate_duration }}
+                {% else %}
+                  Not Checked Out
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="back-icon" onclick="window.history.back();">
+      <i class="fas fa-arrow-left"></i> Go Back
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

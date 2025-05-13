@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student List</title>
+  <link rel="icon" type="image/png" href="facial-recognition.png" />
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+
+  <style>
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background: linear-gradient(to right, #6bc2e1, #1463a5);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .container {
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+      padding: 30px;
+      margin: 40px 20px;
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    h1 {
+      text-align: center;
+      color: #145aa1;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 14px;
+      text-align: center;
+      vertical-align: middle;
+      border: 1px solid #dee2e6;
+    }
+
+    th {
+      background-color: #145aa1;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+
+    tr:hover {
+      background-color: #e3f2fd;
+    }
+
+    .actions a {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 14px;
+      color: #145aa1;
+      border: 1px solid #145aa1;
+      border-radius: 5px;
+      transition: 0.3s ease;
+      text-decoration: none;
+    }
+
+    .actions a:hover {
+      background-color: #145aa1;
+      color: #fff;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 1.2rem;
+      color: #145aa1;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .footer i {
+      margin-right: 8px;
+    }
+
+    .footer:hover {
+      color: #0d4a8b;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px 15px;
+      }
+
+      table {
+        font-size: 14px;
+      }
+
+      .actions a {
+        padding: 5px 10px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Student List</h1>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Class</th>
+            <th>Authorized</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for student in students %}
+          <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.email }}</td>
+            <td>{{ student.phone_number }}</td>
+            <td>{{ student.student_class }}</td>
+            <td>{% if student.authorized %}Yes{% else %}No{% endif %}</td>
+            <td class="actions">
+              <a href="{% url 'student-authorize' pk=student.pk %}"><i class="fas fa-eye"></i> View</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="footer" onclick="location.href='{% url 'home' %}'">
+      <i class="fas fa-home"></i> Back to Home
+    </div>
+  </div>
+</body>
+</html>
